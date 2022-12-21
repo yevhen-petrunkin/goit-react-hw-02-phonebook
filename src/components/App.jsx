@@ -10,18 +10,22 @@ export class App extends Component {
   static defaultProps = {
     initContacts: [],
     initFilter: '',
-    initName: '',
-    initNumber: '',
   };
 
   static propTypes = {
-    initContacts: PropTypes.arrayOf(PropTypes.string).isRequired,
+    initContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
     initFilter: PropTypes.string.isRequired,
   };
 
   state = {
     contacts: this.props.initContacts,
     filter: this.props.initFilter,
+  };
+
+  formSubmitHandler = formData => {
+    const array = [...this.state.contacts];
+    array.push(formData);
+    this.setState({ contacts: [...array] });
   };
 
   render() {
@@ -37,7 +41,7 @@ export class App extends Component {
       >
         <Box pl="20px" as="section">
           <Heading title="Phonebook" />
-          <Form />
+          <Form onSubmit={this.formSubmitHandler} />
           <Box
             width="720px"
             pl="20px"

@@ -20,6 +20,25 @@ export class Form extends Component {
     number: this.props.initNumber,
   };
 
+  handleInputChange = evt =>
+    this.setState({
+      [evt.currentTarget.name]: evt.currentTarget.value,
+    });
+
+  handleSubmit = evt => {
+    evt.preventDefault();
+    this.props.onSubmit(this.state);
+    this.reset();
+  };
+
+  reset = () => {
+    const resetState = Object.keys(this.state).reduce((acc, key) => {
+      acc[key] = '';
+      return acc;
+    }, {});
+    this.setState(resetState);
+  };
+
   render() {
     return (
       <Box
@@ -33,6 +52,7 @@ export class Form extends Component {
         borderRadius="8px"
         boxShadow="1px 1px 6px black"
         as="form"
+        onSubmit={this.handleSubmit}
       >
         <Box
           pb="20px"
@@ -40,8 +60,18 @@ export class Form extends Component {
           alignItems="center"
           style={{ gap: '20px' }}
         >
-          <FormInput name="name" type="text" />
-          <FormInput name="number" type="tel" />
+          <FormInput
+            name="name"
+            type="text"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
+          <FormInput
+            name="number"
+            type="tel"
+            value={this.state.number}
+            onChange={this.handleInputChange}
+          />
         </Box>
         <Button type="submit" text="Add Contact" />
       </Box>
