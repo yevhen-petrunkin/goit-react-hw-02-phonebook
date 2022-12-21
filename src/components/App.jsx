@@ -24,6 +24,7 @@ export class App extends Component {
 
   formSubmitHandler = formData => {
     const array = [...this.state.contacts];
+    console.log(array);
     array.push(formData);
     this.setState({ contacts: [...array] });
   };

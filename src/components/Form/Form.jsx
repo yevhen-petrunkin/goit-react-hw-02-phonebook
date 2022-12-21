@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+// import { nanoid } from 'nanoid';
 import { Box } from '../Box';
 import { FormInput } from './FormInput/FormInput';
 import { Button } from '../Button/Button';
@@ -23,6 +24,7 @@ export class Form extends Component {
   handleInputChange = evt =>
     this.setState({
       [evt.currentTarget.name]: evt.currentTarget.value,
+      id: evt.currentTarget.id,
     });
 
   handleSubmit = evt => {
@@ -65,6 +67,7 @@ export class Form extends Component {
             type="text"
             value={this.state.name}
             onChange={this.handleInputChange}
+            getId={this.getId}
           />
           <FormInput
             name="number"
