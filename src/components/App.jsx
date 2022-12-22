@@ -2,9 +2,10 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from './Box';
 import { Heading } from './Heading/Heading';
-import { Form } from './Form/Form';
+import { FormBox } from './Form/Form';
 import { SubHeading } from './SubHeading/SubHeading';
 import { Search } from './Search/Search';
+import { ContactList } from './ContactList/ContactList';
 
 export class App extends Component {
   static defaultProps = {
@@ -42,7 +43,7 @@ export class App extends Component {
       >
         <Box pl="20px" as="section">
           <Heading title="Phonebook" />
-          <Form onSubmit={this.formSubmitHandler} />
+          <FormBox onSubmit={this.formSubmitHandler} />
           <Box
             width="720px"
             pl="20px"
@@ -53,7 +54,9 @@ export class App extends Component {
           >
             <SubHeading subtitle="Contacts" />
             <Search searchLabel="Find contacts by name" />
-            <Box height="20em" bg="white"></Box>
+            <Box height="20em" bg="white">
+              <ContactList contacts={this.state.contacts} />
+            </Box>
           </Box>
         </Box>
       </Box>
