@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { SearchLabel, SearchInput } from './Search.styled';
 
@@ -14,4 +14,10 @@ export const Search = ({ searchLabel, value, onChange }) => {
       />
     </SearchLabel>
   );
+};
+
+Search.propTypes = {
+  searchLabel: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

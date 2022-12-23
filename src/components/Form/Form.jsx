@@ -2,8 +2,8 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '../Box';
 import { Form } from './Form.styled';
-import { FormName, FormNumber } from './FormInput/FormInput';
-import { Button } from '../Button/Button';
+import { FormName, FormNumber } from './FormInput';
+import { SubmitButton } from '../SubmitButton';
 
 export class FormBox extends Component {
   static defaultProps = {
@@ -21,15 +21,26 @@ export class FormBox extends Component {
     number: this.props.initNumber,
   };
 
-  handleInputChange = evt =>
+  handleInputChange = evt => {
+    const { name, value, id } = evt.currentTarget;
     this.setState({
-      [evt.currentTarget.name]: evt.currentTarget.value,
-      id: evt.currentTarget.id,
+      [name]: value,
+      id: id,
     });
+  };
+
+  showAlertMessage = contactName =>
+    alert(`${contactName} is already in contacts.`);
 
   handleSubmit = evt => {
+    const { checkup, onSubmit } = this.props;
     evt.preventDefault();
-    this.props.onSubmit(this.state);
+    const doesMatch = checkup(this.state);
+    if (doesMatch) {
+      this.showAlertMessage(this.state.name);
+      return;
+    }
+    onSubmit(this.state);
     this.reset();
   };
 
@@ -56,7 +67,7 @@ export class FormBox extends Component {
             onChange={this.handleInputChange}
           />
         </Box>
-        <Button type="submit" text="Add Contact" />
+        <SubmitButton type="submit" text="Add Contact" />
       </Form>
     );
   }

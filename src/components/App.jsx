@@ -1,12 +1,11 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { nanoid } from 'nanoid';
 import { Box } from './Box';
-import { Heading } from './Heading/Heading';
-import { FormBox } from './Form/Form';
-import { SubHeading } from './SubHeading/SubHeading';
-import { Search } from './Search/Search';
-import { ContactList } from './ContactList/ContactList';
+import { Heading } from './Heading';
+import { FormBox } from './Form';
+import { SubHeading } from './SubHeading';
+import { Search } from './Search';
+import { ContactList } from './ContactList';
 
 export class App extends Component {
   static defaultProps = {
@@ -29,6 +28,12 @@ export class App extends Component {
     filter: this.props.initFilter,
   };
 
+  deleteContactHandler = id => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   formSubmitHandler = formData => {
     this.setState(({ contacts }) => ({
       contacts: [formData, ...contacts],
@@ -44,6 +49,14 @@ export class App extends Component {
     const normalizedSearch = filter.toLowerCase();
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedSearch)
+    );
+  };
+
+  checkContactsForMatches = formData => {
+    const { contacts } = this.state;
+    const normalizedName = formData.name.toLowerCase();
+    return contacts.some(
+      contact => contact.name.toLowerCase() === normalizedName
     );
   };
 
@@ -63,7 +76,10 @@ export class App extends Component {
       >
         <Box pl="20px" as="section">
           <Heading title="Phonebook" />
-          <FormBox onSubmit={this.formSubmitHandler} />
+          <FormBox
+            onSubmit={this.formSubmitHandler}
+            checkup={this.checkContactsForMatches}
+          />
           <Box
             width="720px"
             pl="20px"
@@ -79,7 +95,10 @@ export class App extends Component {
               onChange={this.searchHandler}
             />
             <Box height="20em" bg="white">
-              <ContactList contacts={visibleContacts} />
+              <ContactList
+                contacts={visibleContacts}
+                handleClick={this.deleteContactHandler}
+              />
             </Box>
           </Box>
         </Box>
@@ -95,11 +114,4 @@ export class App extends Component {
 //   console.log(array);
 //   array.push(formData);
 //   this.setState({ contacts: [...array] });
-// };
-
-// searchHandler = evt => {
-//   const filteredContacts = this.state.contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(evt.currentTarget.value.toLowerCase())
-//   );
-//   this.setState({ filter: filteredContacts });
 // };

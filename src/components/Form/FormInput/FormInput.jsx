@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
 import { Label, Input } from './FormInput.styled';
@@ -26,7 +26,7 @@ export const FormNumber = ({ value, onChange }) => {
   FormNumber.id = nanoid(6);
   return (
     <Label>
-      Name
+      Number
       <Input
         id={FormNumber.id}
         name="number"
@@ -39,4 +39,14 @@ export const FormNumber = ({ value, onChange }) => {
       />
     </Label>
   );
+};
+
+FormName.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+FormNumber.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
