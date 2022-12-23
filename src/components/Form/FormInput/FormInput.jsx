@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { Label, Input } from './FormInput.styled';
 
 export const FormName = ({ value, onChange }) => {
-  FormName.id = nanoid();
+  FormName.id = nanoid(6);
   return (
     <Label>
       Name
@@ -12,6 +12,8 @@ export const FormName = ({ value, onChange }) => {
         id={FormName.id}
         name="name"
         type="text"
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         onChange={onChange}
         value={value}
         required
@@ -21,7 +23,7 @@ export const FormName = ({ value, onChange }) => {
 };
 
 export const FormNumber = ({ value, onChange }) => {
-  FormNumber.id = nanoid();
+  FormNumber.id = nanoid(6);
   return (
     <Label>
       Name
@@ -29,6 +31,8 @@ export const FormNumber = ({ value, onChange }) => {
         id={FormNumber.id}
         name="number"
         type="text"
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         onChange={onChange}
         value={value}
         required
@@ -36,16 +40,3 @@ export const FormNumber = ({ value, onChange }) => {
     </Label>
   );
 };
-
-// {
-//   /* <Label>
-//         Number
-//         <Input
-//           name="number"
-//           type="tel"
-//           onChange={onChange}
-//           value={value}
-//           required
-//         />
-//       </Label> */
-// }

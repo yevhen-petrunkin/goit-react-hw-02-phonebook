@@ -2,11 +2,16 @@
 
 import { SearchLabel, SearchInput } from './Search.styled';
 
-export const Search = ({ searchLabel }) => {
+export const Search = ({ searchLabel, value, onChange }) => {
   return (
     <SearchLabel>
       {searchLabel}
-      <SearchInput type="text"></SearchInput>
+      <SearchInput
+        name="search"
+        type="text"
+        value={value}
+        onChange={onChange}
+      />
     </SearchLabel>
   );
 };
