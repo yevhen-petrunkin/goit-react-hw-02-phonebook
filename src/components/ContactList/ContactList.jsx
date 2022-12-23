@@ -3,7 +3,6 @@ import { List } from './ContactList.styled';
 import { Contact } from './Contact';
 
 export const ContactList = ({ contacts, handleClick }) => {
-  console.log(contacts);
   return contacts.length ? (
     <List>
       {contacts.map(contact => {
