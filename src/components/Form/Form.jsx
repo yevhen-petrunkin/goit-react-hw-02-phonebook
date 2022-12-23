@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 import { Box } from '../Box';
 import { Form } from './Form.styled';
 import { FormName, FormNumber } from './FormInput';
@@ -22,25 +23,17 @@ export class FormBox extends Component {
   };
 
   handleInputChange = evt => {
-    const { name, value, id } = evt.currentTarget;
+    const { name, value } = evt.currentTarget;
     this.setState({
       [name]: value,
-      id: id,
     });
   };
 
-  showAlertMessage = contactName =>
-    alert(`${contactName} is already in contacts.`);
-
   handleSubmit = evt => {
-    const { checkup, onSubmit } = this.props;
     evt.preventDefault();
-    const doesMatch = checkup(this.state);
-    if (doesMatch) {
-      this.showAlertMessage(this.state.name);
-      return;
-    }
-    onSubmit(this.state);
+    const formData = this.state;
+    formData.id = nanoid(6);
+    this.props.onSubmit(formData);
     this.reset();
   };
 

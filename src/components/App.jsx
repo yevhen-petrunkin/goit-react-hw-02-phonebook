@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Box } from './Box';
 import { Heading } from './Heading';
 import { FormBox } from './Form';
@@ -8,24 +7,14 @@ import { Search } from './Search';
 import { ContactList } from './ContactList';
 
 export class App extends Component {
-  static defaultProps = {
-    initContacts: [
+  state = {
+    contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    initFilter: '',
-  };
-
-  static propTypes = {
-    initContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-    initFilter: PropTypes.string.isRequired,
-  };
-
-  state = {
-    contacts: this.props.initContacts,
-    filter: this.props.initFilter,
+    filter: '',
   };
 
   deleteContactHandler = id => {
@@ -35,10 +24,18 @@ export class App extends Component {
   };
 
   formSubmitHandler = formData => {
+    const doesMatch = this.checkContactsForMatches(formData);
+    if (doesMatch) {
+      this.showAlertMessage(formData.name);
+      return;
+    }
     this.setState(({ contacts }) => ({
       contacts: [formData, ...contacts],
     }));
   };
+
+  showAlertMessage = contactName =>
+    alert(`${contactName} is already in contacts.`);
 
   searchHandler = evt => {
     this.setState({ filter: evt.currentTarget.value });
@@ -76,10 +73,7 @@ export class App extends Component {
       >
         <Box pl="20px" as="section">
           <Heading title="Phonebook" />
-          <FormBox
-            onSubmit={this.formSubmitHandler}
-            checkup={this.checkContactsForMatches}
-          />
+          <FormBox onSubmit={this.formSubmitHandler} />
           <Box
             width="720px"
             pl="20px"

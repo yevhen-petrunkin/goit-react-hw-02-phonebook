@@ -1,21 +1,23 @@
-import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import { List } from './ContactList.styled';
 import { Contact } from './Contact';
 
 export const ContactList = ({ contacts, handleClick }) => {
-  return (
-    <ul>
+  console.log(contacts);
+  return contacts.length ? (
+    <List>
       {contacts.map(contact => {
-        Contact.id = nanoid();
         return (
           <Contact
-            key={Contact.id}
+            key={contact.name}
             contact={contact}
             handleClick={handleClick}
           />
         );
       })}
-    </ul>
+    </List>
+  ) : (
+    <p>Oops... No contacts left.</p>
   );
 };
 
