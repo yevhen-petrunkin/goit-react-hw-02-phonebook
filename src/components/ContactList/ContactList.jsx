@@ -16,7 +16,7 @@ export const ContactList = ({ contacts, handleClick }) => {
       })}
     </List>
   ) : (
-    <p>Oops... No contacts left.</p>
+    <p>Oops... No contacts found.</p>
   );
 };
 

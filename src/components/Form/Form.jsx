@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Box } from '../Box';
 import { Form } from './Form.styled';
 import { FormName, FormNumber } from './FormInput';
@@ -32,7 +32,7 @@ export class FormBox extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const formData = this.state;
-    formData.id = nanoid(6);
+    // formData.id = nanoid(6);
     this.props.onSubmit(formData);
     this.reset();
   };

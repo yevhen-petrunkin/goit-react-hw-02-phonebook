@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { Box } from './Box';
 import { Heading } from './Heading';
 import { FormBox } from './Form';
@@ -30,7 +31,7 @@ export class App extends Component {
       return;
     }
     this.setState(({ contacts }) => ({
-      contacts: [formData, ...contacts],
+      contacts: [{ id: nanoid(6), ...formData }, ...contacts],
     }));
   };
 
