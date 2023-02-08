@@ -1,8 +1,8 @@
 {
-  "name": "react-homework-template",
+  "name": "phonebook-app-on-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yevhen-petrunkin.github.io/goit-react-hw-02-phonebook/",
+  "homepage": "https://yevhen-petrunkin.github.io/phonebook-01-react/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
